@@ -1,5 +1,8 @@
+import 'package:c11_exam_friday/carousel_Image_Item.dart';
+import 'package:c11_exam_friday/row_categories.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
 
 class AudiBooksScreen extends StatelessWidget {
   static const String routeName = 'AudiBooksScreen';
@@ -30,7 +33,6 @@ class AudiBooksScreen extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.lightBlue,
-
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
@@ -51,163 +53,57 @@ class AudiBooksScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Text(
-                  "Categories",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 170,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Text(
-                  "See more",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF4838D1),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 400,
-                height: 50,
-                child: ListView.separated(
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: 10,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Art",
-                        ),
-                      ),
-                    );
-                  },
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 8,
-                ),
-              ),
-            ],
+          RowReusableComponent(
+            title: "Categories",
+            actionText: "See more",
+            titleSize: 15,
+            actionTextSize: 14,
           ),
           SizedBox(
+            width: 400,
             height: 50,
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text(
-                  "Recommended For You",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+            child: ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(width: 10),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Art"),
                   ),
-                ),
-              ),
-              SizedBox(
-                width: 60,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text(
-                  "See more",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF4838D1),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-            ],
+                );
+              },
+              scrollDirection: Axis.horizontal,
+              itemCount: 8,
+            ),
           ),
-
-
-
-          SizedBox(
-            height: 50,
+          SizedBox(height: 50),
+          RowReusableComponent(
+            title: "Recommended For You",
+            actionText: "See more",
+            titleSize: 18,
+            actionTextSize: 17,
           ),
-
+          SizedBox(height: 50),
           CarouselSlider(
-              items: [
-                Container(
-                  margin: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/Image Placeholder.png'),
-                      fit: BoxFit.fill,
-                    ),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/Image Placeholder.png'),
-                      fit: BoxFit.fill,
-                    ),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/Image Placeholder.png'),
-                      fit: BoxFit.fill,
-                    ),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/Image Placeholder.png'),
-                      fit: BoxFit.fill,
-                    ),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-              ],
-              options: CarouselOptions(
-                height: 400,
-                aspectRatio: 16 / 8,
-                viewportFraction: 0.6,
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: 5),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
-                enlargeCenterPage: true,
-                enlargeFactor: 0.5,
-                reverse: true,
-              ))
+            items: [
+              CarouselImageItem(imagePath: 'assets/images/Image Placeholder.png'),
+              CarouselImageItem(imagePath: 'assets/images/Image Placeholder.png'),
+              CarouselImageItem(imagePath: 'assets/images/Image Placeholder.png'),
+              CarouselImageItem(imagePath: 'assets/images/Image Placeholder.png'),
+            ],
+            options: CarouselOptions(
+              height: 400,
+              aspectRatio: 16 / 8,
+              viewportFraction: 0.6,
+              autoPlay: true,
+              autoPlayInterval: Duration(seconds: 5),
+              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              enlargeCenterPage: true,
+              enlargeFactor: 0.5,
+              reverse: true,
+            ),
+          ),
         ],
       ),
     );
